@@ -1,4 +1,5 @@
 {
+  "author": "GUILMIN Leny",
   "name": "template-nuxt-i18n",
   "type": "module",
   "private": true,
@@ -9,17 +10,44 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "pre-commit": "npm run lint:fix",
+    "prepare": "husky",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:reset": "docker-compose down -v && docker-compose up -d",
+    "docker:logs": "docker-compose logs -f mysql",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "tsx prisma/seed.ts",
+    "prisma:reset": "prisma migrate reset --force",
+    "db:setup": "npm run docker:up && npm run prisma:generate && npm run prisma:push && npm run db:seed",
+    "db:reset": "npm run prisma:reset && npm run prisma:seed",
+    "db:seed": "npm run prisma:seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.2.0",
+    "@prisma/nuxt": "^0.3.0",
     "nuxt": "^4.2.1",
     "vue": "^3.5.24",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.10.0",
+    "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prisma": "^6.0.0",
+    "tsx": "^4.7.0",
     "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix"
   }
 }
