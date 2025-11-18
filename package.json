@@ -9,22 +9,18 @@
     "start": "dotenv -e .env -- node .output/server/index.mjs",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
-    
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f mysql",
-    
     "prisma:generate": "prisma generate",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate": "prisma migrate dev",
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "prisma:seed": "tsx prisma/seed.ts",
-    
     "db:seed": "npm run prisma:seed",
     "db:reset": "npm run prisma:migrate reset --force && npm run db:seed"
   },
@@ -39,6 +35,7 @@
     "@nuxt/eslint": "^1.10.0",
     "@prisma/nuxt": "^0.3.0",
     "@types/node": "^24.10.1",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
